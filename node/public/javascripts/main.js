@@ -9,6 +9,7 @@ document.getElementById('set-btn').addEventListener('click', event => {
       headers: { 'Content-Type': 'application/json' },
     }).then(res => {
       console.log('success');
+      document.getElementById('update-success').className += 'visible';
     }).catch(err => {
       console.log('error', err);
     });

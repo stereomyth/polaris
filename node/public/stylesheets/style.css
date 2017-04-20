@@ -107,10 +107,11 @@ input:focus {
   flex-grow: 2;
 }
 .form-message div {
-  padding: 20px 0;
-}
-.form-message div {
+  padding: 14px 0;
   display: none;
+}
+.form-message div.visible {
+  display: block;
 }
 
 hr {
