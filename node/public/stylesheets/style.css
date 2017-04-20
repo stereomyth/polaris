@@ -6,3 +6,39 @@ body {
 a {
   color: #00B7FF;
 }
+
+.disc {
+  background-color: #eee;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.arrow {
+  height: 100px;
+  /*background-color: red;*/
+  width: 12px;
+  margin: auto;
+} 
+
+.arrow:before, .arrow:after{
+  content: '';
+  height: 0;
+  width: 0;
+  position: absolute;
+  border: 6px solid transparent;
+}
+
+.arrow:before {
+  border-bottom: 50px solid #ab0000;
+  border-top-width: 0px;
+}
+
+.arrow:after {
+  border-top: 50px solid #aaa;
+  border-bottom-width: 0px;
+  top: 50%;
+}
