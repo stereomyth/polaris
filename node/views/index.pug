@@ -2,23 +2,33 @@ extends layout
 
 block content
   h1= title
-  p You are at latitude: #{loc.lat || 'unkown'}, longitude: #{loc.long || 'unkown'}
+  h2 Location
+  form(onsubmit="return false")
+    .row
+      .col
+        label(for='lat') Latitude
+        input(type='text', id='lat', value=loc.lat || 0, required)
+      .col
+        label(for='long') Longitude
+        input(type='text', id='long', value=loc.long || 0, required)
+    .form-flex
+      .form-message
+        #update-success Compass posistion updated 
+        #update-fail Update failed
+      button(id='set-btn') Update
+
+  h2 Destination
   p berlin is at #{berlin.lat}, #{berlin.long}
-  p Your bearing is #{bearing || 'unkown'}
+
+  //- p You are at latitude: #{loc.lat || 'unkown'}, longitude: #{loc.long || 'unkown'}
+  p Your bearing is #{bearing || 'unkown'}°
 
   .disc
     .arrow(style=`transform: rotate(${bearing}deg)`)
 
   hr
-  form(onsubmit="return false")
-    label(for='lat') Latitude
-    br
-    input(type='number', id='lat', value=1, required)
-    br
-    label(for='long') Longitude
-    br
-    input(type='number', id='long', value=1, required)
-    br
-    button(id='set-btn') Click
+    
+    
+    
 
   //- iframe(width='600', height='450', frameborder='0', style='border:0', src=src, allowfullscreen)
