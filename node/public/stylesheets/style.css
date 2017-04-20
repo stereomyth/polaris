@@ -14,14 +14,14 @@ a {
   width: 100px;
   height: 100px;
   padding: 10px;
-  margin: 20px;
+  margin-top: 20px;
 }
 
 .arrow {
   height: 100px;
-  /*background-color: red;*/
   width: 12px;
   margin: auto;
+  position: relative;
 } 
 
 .arrow:before, .arrow:after{

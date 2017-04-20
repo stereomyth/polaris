@@ -16,10 +16,11 @@ let bearing = (start, end) => {
   return (toDeg(θ) + 360) % 360;
 };
 
-/* GET home page. */ 
-router.get('/:lat/:long', function(req, res, next) {
+let home   = { lat: 52.4720187, long: -1.9104001 };
+let berlin = { lat: 52.5200070, long: 13.4049540 };
 
-  let berlin = { lat: 53, long: 13 };
+/* GET index. */ 
+router.get('/', function(req, res, next) {
 
   let map = 'https://www.google.com/maps/embed/v1/directions?' +
     'origin=' + req.params.lat + '%20' + req.params.long + 
@@ -27,9 +28,23 @@ router.get('/:lat/:long', function(req, res, next) {
     '&key=' + $g.mapKey;
 
   // console.log('baghdad to osaka', bearing({lat:35, long: 45}, {lat:35, long: 135})); // should be 77
-  // console.log('bham to berlin', bearing(req.params, berlin)); // should be 84
+  // console.log('bham to berlin', bearing(home, berlin)); // should be 84
 
-  res.render('index', { title: 'Polaris', loc: req.params, berlin: berlin, src: map, bearing: bearing(req.params, berlin) });
+  res.render('index', { title: 'Polaris', loc: req.params, berlin: berlin, src: map, bearing: bearing(home, berlin) });
+});
+
+/*  GET single bearing */ 
+router.get('/bearing', function(req, res, next) {
+  // return single bearing of latest tweet.
+
+  res.send(bearing(home, berlin).toString());
+});
+
+/*  SET current coords. */ 
+router.post('/:lat/:long', function(req, res, next) {
+
+  // write submitted lat and long to file.
+
 });
 
 module.exports = router;
