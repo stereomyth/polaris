@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
   // console.log('baghdad to osaka', bearing({lat:35, long: 45}, {lat:35, long: 135})); // should be 77
   // console.log('bham to berlin', bearing(home, berlin)); // should be 84
 
-  res.render('index', { title: 'Polaris', loc: req.params, berlin: berlin, src: map, bearing: bearing(home, berlin) });
+  res.render('index', { title: 'Polaris', loc: home, berlin: berlin, src: map, bearing: bearing(home, berlin) });
 });
 
 /*  GET single bearing */ 

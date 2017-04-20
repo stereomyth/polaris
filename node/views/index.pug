@@ -4,7 +4,7 @@ block content
   h1= title
   p You are at latitude: #{loc.lat || 'unkown'}, longditude: #{loc.long || 'unkown'}
   p berlin is at #{berlin.lat}, #{berlin.long}
-  p Your bearing is be #{bearing || 'unkown'}
+  p Your bearing is #{bearing || 'unkown'}
 
   .disc
     .arrow(style=`transform: rotate(${bearing}deg)`)
