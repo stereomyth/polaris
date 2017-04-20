@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var $g = require('../env.js');
 
+var fs = require('fs');
+
 toRad = deg => deg * Math.PI / 180;
 toDeg = rad => rad * 180 / Math.PI;
 
@@ -30,7 +32,18 @@ router.get('/', function(req, res, next) {
   // console.log('baghdad to osaka', bearing({lat:35, long: 45}, {lat:35, long: 135})); // should be 77
   // console.log('bham to berlin', bearing(home, berlin)); // should be 84
 
-  res.render('index', { title: 'Polaris', loc: home, berlin: berlin, src: map, bearing: bearing(home, berlin) });
+  fs.readFile('coords.json', 'utf8', (err, data) => {
+    if (err) throw err;
+    let json = JSON.parse(data);
+    res.render('index', { 
+      title: 'Polaris', 
+      loc: json, 
+      berlin: berlin, 
+      src: map, 
+      bearing: bearing(json, berlin) 
+    });
+  });
+
 });
 
 /*  GET single bearing */ 
@@ -41,9 +54,12 @@ router.get('/bearing', function(req, res, next) {
 });
 
 /*  SET current coords. */ 
-router.post('/:lat/:long', function(req, res, next) {
+router.post('/set', function(req, res, next) {
 
-  // write submitted lat and long to file.
+  fs.writeFile('coords.json', JSON.stringify(req.body), 'utf8', err => {
+    if (err) throw err;
+    res.send('saved');
+  });
 
 });
 
