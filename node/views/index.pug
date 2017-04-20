@@ -4,3 +4,6 @@ block content
   h1 Polaris
   p You are at #{loc.lat}, #{loc.long}
   p berlin is at #{berlin.lat}, #{berlin.long}
+  p Your bearing would be #{bearing || 'unkown'}
+
+  iframe(width='600', height='450', frameborder='0', style='border:0', src=src, allowfullscreen)
