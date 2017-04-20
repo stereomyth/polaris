@@ -2,11 +2,23 @@ extends layout
 
 block content
   h1= title
-  p You are at latitude: #{loc.lat || 'unkown'}, longditude: #{loc.long || 'unkown'}
+  p You are at latitude: #{loc.lat || 'unkown'}, longitude: #{loc.long || 'unkown'}
   p berlin is at #{berlin.lat}, #{berlin.long}
   p Your bearing is #{bearing || 'unkown'}
 
   .disc
     .arrow(style=`transform: rotate(${bearing}deg)`)
 
-  iframe(width='600', height='450', frameborder='0', style='border:0', src=src, allowfullscreen)
+  hr
+  form(onsubmit="return false")
+    label(for='lat') Latitude
+    br
+    input(type='number', id='lat', value=1, required)
+    br
+    label(for='long') Longitude
+    br
+    input(type='number', id='long', value=1, required)
+    br
+    button(id='set-btn') Click
+
+  //- iframe(width='600', height='450', frameborder='0', style='border:0', src=src, allowfullscreen)
