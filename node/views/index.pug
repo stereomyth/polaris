@@ -1,8 +1,11 @@
 extends layout
 
 block content
+
   h1= title
+
   h2 Location
+
   form(onsubmit="return false")
     .row
       .col
@@ -18,13 +21,26 @@ block content
       button(id='set-btn') Update
 
   h2 Destination
-  p berlin is at #{berlin.lat}, #{berlin.long}
+  //- p berlin is at #{berlin.lat}, #{berlin.long}
+  .row
+    .col
+      label Latitude
+      .faux-input #{berlin.lat}
+    .col
+      label Longitude
+      .faux-input #{berlin.long}
 
   //- p You are at latitude: #{loc.lat || 'unkown'}, longitude: #{loc.long || 'unkown'}
-  p Your bearing is #{bearing || 'unkown'}°
+  //- p Your bearing is #{bearing || 'unkown'}°
 
-  .disc
-    .arrow(style=`transform: rotate(${bearing}deg)`)
+
+  .compass-flex
+    .bearing-contain
+      label Bearing    
+      .faux-input #{bearing || 'unkown'}°
+    .compass-contain
+      .compass
+        .needle(style=`transform: rotate(${bearing}deg)`)
 
   hr
     

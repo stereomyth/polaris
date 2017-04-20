@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
       loc: json, 
       berlin: berlin, 
       src: map, 
-      bearing: bearing(json, berlin) 
+      bearing: bearing(json, berlin).toFixed(3)
     });
   });
 
