@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var $g = require('../env.js');
+var env = require('../env.js');
+var Twitter = require('twitter');
 
 var fs = require('fs');
 
@@ -21,26 +22,65 @@ let bearing = (start, end) => {
 let home   = { lat: 52.4720187, long: -1.9104001 };
 let berlin = { lat: 52.5200070, long: 13.4049540 };
 
+
+// var OAuth2 = require('OAuth').OAuth2; 
+// var oauth2 = new OAuth2(env.twitter.api, env.twitter.secret, 'https://api.twitter.com/', null, 'oauth2/token', null);
+// oauth2.getOAuthAccessToken('', {
+//     'grant_type': 'client_credentials'
+//   }, function (e, access_token) {
+//       console.log(access_token); //string that we can use to authenticate request
+// });
+
+let getCoords = new Promise ((resolve, reject) => {
+  fs.readFile('coords.json', 'utf8', (err, data) => {
+    if (!err) {
+      resolve(JSON.parse(data)); 
+    } else {
+      reject(err);
+    }
+  });
+});
+
+let searchOpts = {
+  q: '"I wish"',
+  result_type: 'recent',
+  include_entities: false,
+  count: 50,
+};
+
+var twitter = new Twitter({
+  consumer_key: env.twitter.api,
+  consumer_secret: env.twitter.secret,
+  bearer_token: env.twitter.bearer
+});
+
+let getTweets = new Promise ((resolve, reject) => {
+  twitter.get('search/tweets', searchOpts, function(error, tweets, response) {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(tweets);
+    }
+  });
+});
+
 /* GET index. */ 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
   let map = 'https://www.google.com/maps/embed/v1/directions?' +
     'origin=' + home.lat + '%20' + home.long + 
     '&destination=' + berlin.lat + '%20' + berlin.long + 
-    '&key=' + $g.mapKey;
+    '&key=' + env.mapKey;
 
-  // console.log('baghdad to osaka', bearing({lat:35, long: 45}, {lat:35, long: 135})); // should be 77
-  // console.log('bham to berlin', bearing(home, berlin)); // should be 84
-
-  fs.readFile('coords.json', 'utf8', (err, data) => {
-    if (err) throw err;
-    let json = JSON.parse(data);
+  Promise.all([getCoords, getTweets]).then(results => {
+    let [coords, tweets] = results;
     res.render('index', { 
-      title: 'Polaris', 
-      loc: json, 
-      berlin: berlin, 
+      title: 'Polaris',
+      berlin: berlin,
+      coords: coords,
       src: map, 
-      bearing: bearing(json, berlin).toFixed(3)
+      bearing: bearing(coords, berlin).toFixed(3),
+      tweets: tweets,
     });
   });
 

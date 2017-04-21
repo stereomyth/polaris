@@ -10,10 +10,10 @@ block content
     .row
       .col
         label(for='lat') Latitude
-        input(type='text', id='lat', value=loc.lat || 0, required)
+        input(type='text', id='lat', value=coords.lat || 0, required)
       .col
         label(for='long') Longitude
-        input(type='text', id='long', value=loc.long || 0, required)
+        input(type='text', id='long', value=coords.long || 0, required)
     .form-flex
       .form-message
         #update-success Compass location updated 
@@ -30,7 +30,7 @@ block content
       label Longitude
       .faux-input #{berlin.long}
 
-  //- p You are at latitude: #{loc.lat || 'unkown'}, longitude: #{loc.long || 'unkown'}
+  //- p You are at latitude: #{coords.lat || 'unkown'}, longitude: #{coords.long || 'unkown'}
   //- p Your bearing is #{bearing || 'unkown'}°
 
 
@@ -43,6 +43,16 @@ block content
         .needle(style=`transform: rotate(${bearing}deg)`)
 
   hr
+
+  .tweets
+    each tweet in tweets.statuses
+      .tweet
+        .meta
+          strong= tweet.user.name 
+          span  @#{tweet.user.screen_name}
+        p= tweet.text
+        p= tweet.geo
+      hr
     
     
     
