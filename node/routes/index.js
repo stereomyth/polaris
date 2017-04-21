@@ -22,7 +22,6 @@ let bearing = (start, end) => {
 let home   = { lat: 52.4720187, long: -1.9104001 };
 let berlin = { lat: 52.5200070, long: 13.4049540 };
 
-
 // var OAuth2 = require('OAuth').OAuth2; 
 // var oauth2 = new OAuth2(env.twitter.api, env.twitter.secret, 'https://api.twitter.com/', null, 'oauth2/token', null);
 // oauth2.getOAuthAccessToken('', {
@@ -31,15 +30,37 @@ let berlin = { lat: 52.5200070, long: 13.4049540 };
 //       console.log(access_token); //string that we can use to authenticate request
 // });
 
-let getCoords = new Promise ((resolve, reject) => {
-  fs.readFile('coords.json', 'utf8', (err, data) => {
-    if (!err) {
-      resolve(JSON.parse(data)); 
-    } else {
-      reject(err);
-    }
+let getCoords = () => {
+  console.log('get coords');
+  return new Promise ((resolve, reject) => {
+    fs.readFile('coords.json', 'utf8', (err, data) => {
+      if (!err) {
+        resolve(JSON.parse(data)); 
+      } else {
+        if (err.code === 'ENOENT') {
+          setCoords(home).then(coords => {
+            resolve(coords);
+          });
+        } else {
+          reject(err);
+        }
+      }
+    });
   });
-});
+};
+
+let setCoords = coords => {
+  console.log('set coords');
+  return new Promise ((resolve, reject) => {
+    fs.writeFile('coords.json', JSON.stringify(coords), 'utf8', err => {
+      if (!err) {
+        resolve(coords); 
+      } else {
+        reject(err);
+      }
+    });
+  });
+};
 
 let searchOpts = {
   q: '"I wish"',
@@ -54,15 +75,18 @@ var twitter = new Twitter({
   bearer_token: env.twitter.bearer
 });
 
-let getTweets = new Promise ((resolve, reject) => {
-  twitter.get('search/tweets', searchOpts, function(error, tweets, response) {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(tweets);
-    }
+let getTweets = () => {
+  console.log('get tweets');
+  return new Promise ((resolve, reject) => {
+    twitter.get('search/tweets', searchOpts, function(error, tweets, response) {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(tweets);
+      }
+    });
   });
-});
+};
 
 /* GET index. */ 
 router.get('/', function (req, res, next) {
@@ -72,16 +96,14 @@ router.get('/', function (req, res, next) {
     '&destination=' + berlin.lat + '%20' + berlin.long + 
     '&key=' + env.mapKey;
 
-  Promise.all([getCoords, getTweets]).then(results => {
+  Promise.all([getCoords(), getTweets()]).then(results => {
     let [coords, tweets] = results;
     res.render('index', { 
-      title: 'Polaris',
-      berlin: berlin,
-      coords: coords,
-      src: map, 
-      bearing: bearing(coords, berlin).toFixed(3),
-      tweets: tweets,
+      title: 'Polaris', berlin: berlin, coords: coords, src: map, 
+      bearing: bearing(coords, berlin).toFixed(3), tweets: tweets,
     });
+  }).catch(err => {
+    console.log(err);
   });
 
 });
@@ -96,9 +118,10 @@ router.get('/bearing', function(req, res, next) {
 /*  SET current coords. */ 
 router.post('/set', function(req, res, next) {
 
-  fs.writeFile('coords.json', JSON.stringify(req.body), 'utf8', err => {
-    if (err) throw err;
-    res.send('saved');
+  setCoords(req.body).then((coords) => {
+    res.send('saved ' + coords);
+  }).catch(err => {
+    console.log(err);
   });
 
 });
