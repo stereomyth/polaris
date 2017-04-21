@@ -100,17 +100,31 @@ let getTweets = () => {
 /* GET index. */ 
 router.get('/', function (req, res, next) {
 
-  let map = 'https://www.google.com/maps/embed/v1/directions?' +
-    'origin=' + home.lat + '%20' + home.long + 
-    '&destination=' + berlin.lat + '%20' + berlin.long + 
-    '&key=' + env.mapKey;
+  // let map = 'https://www.google.com/maps/embed/v1/directions?' +
+  //   'origin=' + home.lat + '%20' + home.long + 
+  //   '&destination=' + berlin.lat + '%20' + berlin.long + 
+  //   '&key=' + env.mapKey;
 
   Promise.all([getCoords(), getTweets()]).then(results => {
-    let [coords, tweets] = results;
-    res.render('index', { 
-      title: 'Polaris', berlin: berlin, coords: coords, src: map, 
-      bearing: bearing(coords, berlin).toFixed(3), tweets: tweets,
+    let [coords, allTweets] = results;
+    let tweets = [];
+
+    allTweets.statuses.forEach(tweet => {
+      if (tweet.coordinates) {
+        tweets.push({
+          text: tweet.text,
+          name: tweet.user.name,
+          user: tweet.user.screen_name,
+          lat: tweet.coordinates.coordinates[1],
+          long: tweet.coordinates.coordinates[0],
+          bearing: bearing(coords, { 
+            lat: tweet.coordinates.coordinates[1], long: tweet.coordinates.coordinates[0] 
+          }).toFixed(3),
+        });
+      }
     });
+
+    res.render('index', { dest: tweets[0], loc: coords });
   }).catch(err => {
     console.log(err);
   });
