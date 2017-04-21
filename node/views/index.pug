@@ -46,13 +46,14 @@ block content
 
   .tweets
     each tweet in tweets.statuses
-      .tweet
-        .meta
-          strong= tweet.user.name 
-          span  @#{tweet.user.screen_name}
-        p= tweet.text
-        p= tweet.geo
-      hr
+      if tweet.coordinates
+        .tweet
+          .meta
+            strong= tweet.user.name 
+            span  @#{tweet.user.screen_name}
+          p= tweet.text
+          p lat: #{tweet.coordinates.coordinates[1]}, long: #{tweet.coordinates.coordinates[0]}
+        hr
     
     
     

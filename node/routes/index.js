@@ -66,7 +66,8 @@ let searchOpts = {
   q: '"I wish"',
   result_type: 'recent',
   include_entities: false,
-  count: 50,
+  count: 100,
+  // geocode: '37.781157 -122.398720 1mi'
 };
 
 var twitter = new Twitter({
@@ -78,13 +79,21 @@ var twitter = new Twitter({
 let getTweets = () => {
   console.log('get tweets');
   return new Promise ((resolve, reject) => {
-    twitter.get('search/tweets', searchOpts, function(error, tweets, response) {
-      if (error) {
-        reject(error);
+    fs.readFile('tweets.json', 'utf8', (err, data) => {
+      if (!err) {
+        resolve(JSON.parse(data)); 
       } else {
-        resolve(tweets);
+        reject(err);
       }
     });
+    // twitter.get('search/tweets', searchOpts, function(error, tweets, response) {
+    //   if (error) {
+    //     reject(error);
+    //   } else {
+    //     fs.writeFile('tweets.json', JSON.stringify(tweets), 'utf8');
+    //     resolve(tweets);
+    //   }
+    // });
   });
 };
 
