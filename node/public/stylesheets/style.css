@@ -74,6 +74,7 @@ button {
   cursor: pointer;
   letter-spacing: .4em;
   transition: all .3s;
+  outline: none;
 }
 
 button:hover {
