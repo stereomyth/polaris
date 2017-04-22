@@ -11,6 +11,6 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('./public/styles'));
 });
  
-gulp.task('serve', function () {
+gulp.task('serve', ['styles'], function () {
   gulp.watch('./dev/styles/**/*.scss', ['styles']);
 });

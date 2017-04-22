@@ -1,5 +1,20 @@
+@mixin at-least($device-width) {
+  @media screen and (min-width: $device-width) {
+    @content;
+  }
+}
+
+@mixin until($device-width) {
+  @media screen and (max-width: $device-width - 1px) {
+    @content;
+  }
+}
+
+$tablet: 768px;
+$laptop: 992px;
+$desktop: 1200px;
+
 body {
-  /*padding: 50px;*/
   margin: 0;
   padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -10,12 +25,17 @@ body {
 
 h1 {
   font-family: "aw-conqueror-inline", sans-serif;
-  font-size: 80px;
   font-weight: lighter;
   line-height: 1;
   letter-spacing: 0.53em;
-  margin-top: 100px;
+  margin-top: 50px;
   color: rgba(white, .9);
+  font-size: 10.8vw;
+
+  @include at-least($tablet) {
+    margin-top: 100px;
+    font-size: 80px;
+  }
 }
 
 h2 {
@@ -96,8 +116,8 @@ button {
 }
 
 .geo-icon {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   border: 2px solid currentColor;
   border-radius: 50%;
   position: relative;
@@ -128,8 +148,8 @@ button {
 .geo-icon-mask {
   position: relative;
   background-color: #222;
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   margin: 2px;
   z-index: 10;
@@ -144,8 +164,13 @@ input, .faux-input {
   border: none;
   border-bottom: 1px solid rgba(white, .2);
   width: 100%;
-  font-size: 24px;
   margin-bottom: 2em;
+  font-size: 20px;
+
+  @include at-least($tablet) {
+    font-size: 24px;
+    display: flex;
+  }
 }
 
 input:focus {
@@ -177,16 +202,24 @@ hr {
 }
 
 .compass-flex {
-  display: flex;
+  @include at-least($tablet) {
+    display: flex;
+  }
 }
 
 .bearing-contain {
-  padding-right: 15px;
   box-sizing: border-box;
+
+  @include at-least($tablet) {
+    padding-right: 15px;
+  }
 }
 
 .bearing-contain, .compass-contain {
-  width: 50%;
+  @include at-least($tablet) {
+    width: 50%;
+
+  }
 }
 
 .compass {
