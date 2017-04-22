@@ -106,12 +106,13 @@ button {
 
 
 #geo-btn {
-  padding: 0 16px;
+  padding: 11px 16px;
   margin-right: 6px;
   display: none;
 
   &.visible {
     display: inline-block;
+    vertical-align: bottom;
   }
 }
 
@@ -180,14 +181,23 @@ input:focus {
 
 .form-flex {
   display: flex;
+  
+  @include until($tablet) {
+    flex-wrap: wrap;
+  }
 }
 
 .form-message {
-  flex-grow: 2;
+  // flex-grow: 2;
+  width: 100%;
 
   & div {
-    padding: 14px 0;
+    padding-bottom: 14px;
     display: none;
+
+    @include at-least($tablet) {
+      padding: 14px 0;
+    }
 
     &.visible {
       display: block;
