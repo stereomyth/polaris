@@ -1,8 +1,8 @@
 node_modules
 env.js
 node/public/styles
+node/public/scripts
 
 npm-debug.log
 coords.json
 tweets.json
-
