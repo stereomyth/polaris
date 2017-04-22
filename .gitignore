@@ -4,3 +4,5 @@ coords.json
 node/npm-debug.log
 
 node/tweets.json
+
+node/public/styles

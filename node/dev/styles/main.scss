@@ -4,7 +4,7 @@ body {
   padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #222;
-  color: rgba(255,255,255, .5);
+  color: rgba(white, .5);
   padding-bottom: 100px;
 }
 
@@ -15,7 +15,7 @@ h1 {
   line-height: 1;
   letter-spacing: 0.53em;
   margin-top: 100px;
-  color: rgba(255,255,255, .9);
+  color: rgba(white, .9);
 }
 
 h2 {
@@ -24,19 +24,20 @@ h2 {
   position: relative;
   margin-bottom: 1.5em;
   margin-top: 3em;
-  color: rgba(255,255,255, .7);
+  color: rgba(white, .7);
+
+  &:after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background-color: rgba(white, .3);
+    position: absolute;
+    bottom: .4em;
+    transform: translateX(10px);
+    font-weight: normal;
+  }
 }
 
-h2:after {
-  content: '';
-  width: 50px;
-  height: 3px;
-  background-color: rgba(255,255,255, .3);
-  position: absolute;
-  bottom: .4em;
-  transform: translateX(10px);
-  font-weight: normal;
-}
 
 a {
   color: #00B7FF;
@@ -63,34 +64,35 @@ a {
 
 label {
   display: block;
-  color: rgba(255,255,255, .3);
+  color: rgba(white, .3);
 }
 
 button {
   background-color: transparent;
-  border: 1px solid rgba(255,255,255, .1);
-  color: rgba(255,255,255, .5);
+  border: 1px solid rgba(white, .1);
+  color: rgba(white, .5);
   text-transform: uppercase;
   padding: 15px 30px;
   cursor: pointer;
   letter-spacing: .4em;
   transition: all .3s;
   outline: none;
+
+  &:hover {
+    border-color: rgba(white, .4);
+    color: rgba(white, .8);
+  }
 }
 
-button:hover {
-  border-color: rgba(255,255,255, .4);
-  color: rgba(255,255,255, .8);
-}
 
 #geo-btn {
   padding: 0 16px;
   margin-right: 6px;
   display: none;
-}
 
-#geo-btn.visible {
-  display: inline-block;
+  &.visible {
+    display: inline-block;
+  }
 }
 
 .geo-icon {
@@ -99,28 +101,28 @@ button:hover {
   border: 2px solid currentColor;
   border-radius: 50%;
   position: relative;
-}
 
-.geo-icon:before, .geo-icon:after {
-  content: '';
-  position: absolute;
-  height: 2px;
-  width: 2px;
-  background-color: currentColor;
-}
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 2px;
+    background-color: currentColor;
+  }
 
-.geo-icon:before {
-  height: 100%;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
+  &:before {
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-.geo-icon:after {
-  width: 100%;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+  &:after {
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
 }
 
 .geo-icon-mask {
@@ -140,14 +142,14 @@ input, .faux-input {
   padding: 18px 0;
   padding-top: 8px;
   border: none;
-  border-bottom: 1px solid rgba(255,255,255, .2);
+  border-bottom: 1px solid rgba(white, .2);
   width: 100%;
   font-size: 24px;
   margin-bottom: 2em;
 }
 
 input:focus {
-  border-bottom-color: rgba(255,255,255, .8);
+  border-bottom-color: rgba(white, .8);
   outline: none;
 }
 
@@ -157,18 +159,20 @@ input:focus {
 
 .form-message {
   flex-grow: 2;
-}
-.form-message div {
-  padding: 14px 0;
-  display: none;
-}
-.form-message div.visible {
-  display: block;
+
+  & div {
+    padding: 14px 0;
+    display: none;
+
+    &.visible {
+      display: block;
+    }
+  }
 }
 
 hr {
   border: none;
-  border-bottom: 1px solid rgba(255,255,255, .2);
+  border-bottom: 1px solid rgba(white, .2);
   margin: 3em 0;
 }
 
@@ -186,7 +190,7 @@ hr {
 }
 
 .compass {
-  border: 2px solid rgba(255,255,255, .2);
+  border: 2px solid rgba(white, .2);
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -199,23 +203,24 @@ hr {
   width: 12px;
   margin: auto;
   position: relative;
+
+  &:before, &:after{
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    border: 6px solid transparent;
+  }
+
+  &:before {
+    border-bottom: 50px solid rgba(white, .7);
+    border-top-width: 0px;
+  }
+
+  &:after {
+    border-top: 50px solid rgba(white, .2);
+    border-bottom-width: 0px;
+    top: 50%;
+  }
 } 
 
-.needle:before, .needle:after{
-  content: '';
-  height: 0;
-  width: 0;
-  position: absolute;
-  border: 6px solid transparent;
-}
-
-.needle:before {
-  border-bottom: 50px solid rgba(255,255,255, .7);
-  border-top-width: 0px;
-}
-
-.needle:after {
-  border-top: 50px solid rgba(255,255,255, .2);
-  border-bottom-width: 0px;
-  top: 50%;
-}
