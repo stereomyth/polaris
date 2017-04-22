@@ -82,6 +82,56 @@ button:hover {
   color: rgba(255,255,255, .8);
 }
 
+#geo-btn {
+  padding: 0 16px;
+  margin-right: 6px;
+  display: none;
+}
+
+#geo-btn.visible {
+  display: inline-block;
+}
+
+.geo-icon {
+  width: 15px;
+  height: 15px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  position: relative;
+}
+
+.geo-icon:before, .geo-icon:after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 2px;
+  background-color: currentColor;
+}
+
+.geo-icon:before {
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.geo-icon:after {
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.geo-icon-mask {
+  position: relative;
+  background-color: #222;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin: 2px;
+  z-index: 10;
+}
+
 input, .faux-input {
   transition: all .3s;
   background-color: transparent;
