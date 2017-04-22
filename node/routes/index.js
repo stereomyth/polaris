@@ -83,17 +83,16 @@ let getTweets = () => {
       if (!err) {
         resolve(JSON.parse(data)); 
       } else {
-        reject(err);
+        twitter.get('search/tweets', searchOpts, function(error, tweets, response) {
+          if (error) {
+            reject(error);
+          } else {
+            fs.writeFile('tweets.json', JSON.stringify(tweets), 'utf8');
+            resolve(tweets);
+          }
+        });
       }
     });
-    // twitter.get('search/tweets', searchOpts, function(error, tweets, response) {
-    //   if (error) {
-    //     reject(error);
-    //   } else {
-    //     fs.writeFile('tweets.json', JSON.stringify(tweets), 'utf8');
-    //     resolve(tweets);
-    //   }
-    // });
   });
 };
 
