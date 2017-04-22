@@ -1,3 +1,4 @@
+/* globals document, fetch, navigator, alert, console */
 'use strict';
 
 let setCoords = (lat, long) => {
@@ -27,15 +28,13 @@ if ("geolocation" in navigator) {
 }
 
 document.getElementById('geo-btn').addEventListener('click', event => {
-  navigator.geolocation.getCurrentPosition(function(position) {
+  navigator.geolocation.getCurrentPosition( position => {
     let lat = document.getElementById('lat').value = position.coords.latitude.toFixed(3);
     let long = document.getElementById('long').value = position.coords.longitude.toFixed(3);
 
     setCoords(lat, long);
   },
-  function(error){
-    alert(error.message);
-  });
+  error => { alert(error.message); });
   
 }, false);
 
