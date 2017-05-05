@@ -51,6 +51,10 @@ block content
   else
     p No destination can be found
 
-  hr
-    
-  //- iframe(width='600', height='450', frameborder='0', style='border:0', src=src, allowfullscreen)
+  //- hr
+
+  #map
+
+  script.
+    let hmm  = {lat: #{loc.lat}, lng: #{loc.long}};
+    let dest = {lat: #{dest.lat}, lng: #{dest.long}};

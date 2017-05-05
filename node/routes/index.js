@@ -123,7 +123,7 @@ router.get('/', function (req, res, next) {
       }
     });
 
-    res.render('index', { dest: tweets[0], loc: coords });
+    res.render('index', { dest: tweets[0], loc: coords, mapKey: env.maps.js });
   }).catch(err => {
     console.log(err);
   });

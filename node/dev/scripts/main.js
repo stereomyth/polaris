@@ -35,7 +35,4 @@ document.getElementById('geo-btn').addEventListener('click', event => {
     setCoords(lat, long);
   },
   error => { alert(error.message); });
-  
 }, false);
-
-
