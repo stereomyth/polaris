@@ -79,7 +79,7 @@ var twitter = new Twitter({
 let getTweets = () => {
   console.log('get tweets');
   return new Promise ((resolve, reject) => {
-    fs.readFile('tweets.json', 'utf8', (err, data) => {
+    fs.readFile('example.json', 'utf8', (err, data) => {
       if (!err) {
         resolve(JSON.parse(data)); 
       } else {
@@ -87,7 +87,7 @@ let getTweets = () => {
           if (error) {
             reject(error);
           } else {
-            fs.writeFile('tweets.json', JSON.stringify(tweets), 'utf8');
+            fs.writeFile('example.json', JSON.stringify(tweets), 'utf8');
             resolve(tweets);
           }
         });
