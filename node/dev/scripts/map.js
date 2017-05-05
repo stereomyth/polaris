@@ -84,10 +84,20 @@ let initMap;
       zoom: 1,
     });
     let location = new google.maps.Marker({
+      icon: {
+        scaledSize: { width: 20, height: 20 },
+        url: '/images/marker1.png',
+        anchor: {x: 20, y: 20},
+      },
       position: hmm,
-      map: map
+      map: map,
     });
     let destination = new google.maps.Marker({
+      icon: {
+        scaledSize: { width: 20, height: 20 },
+        url: '/images/marker2.png',
+        anchor: {x: 20, y: 20},
+      },
       position: dest,
       map: map
     });
