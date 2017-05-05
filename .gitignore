@@ -6,3 +6,5 @@ node/public/scripts
 npm-debug.log
 coords.json
 tweets.json
+
+node/example.json
