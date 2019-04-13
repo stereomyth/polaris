@@ -1,0 +1,23 @@
+{
+  "name": "polaris",
+  "version": "1.0.0",
+  "description": "stella illa quae polaris dicitur",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "netlify-lambda": "^1.4.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stereomyth/polaris.git"
+  },
+  "author": "James King",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stereomyth/polaris/issues"
+  },
+  "homepage": "https://github.com/stereomyth/polaris#readme"
+}
