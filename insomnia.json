@@ -1,0 +1,89 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2019-04-13T09:04:09.736Z",
+	"__export_source": "insomnia.desktop.app:v6.3.2",
+	"resources": [
+		{
+			"_id": "wrk_d09ed547ba7b4f0383a2d507e5ba1eea",
+			"created": 1555146006189,
+			"description": "",
+			"modified": 1555146023655,
+			"name": "Polaris",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_3f0515d0dcd14026b8143f7776d781cd",
+			"color": null,
+			"created": 1555146006263,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1555146006263,
+			"modified": 1555146006263,
+			"name": "New Environment",
+			"parentId": "wrk_d09ed547ba7b4f0383a2d507e5ba1eea",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_9365cfd3a0aa45dca81734366efe7348",
+			"cookies": [],
+			"created": 1555146006265,
+			"modified": 1555146006265,
+			"name": "Default Jar",
+			"parentId": "wrk_d09ed547ba7b4f0383a2d507e5ba1eea",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_f7cbf2d5689b451f88dae165f8d29b66",
+			"authentication": {},
+			"body": {},
+			"created": 1555146191447,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1555146191448,
+			"method": "GET",
+			"modified": 1555146215214,
+			"name": "Seek",
+			"parameters": [],
+			"parentId": "wrk_d09ed547ba7b4f0383a2d507e5ba1eea",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ lambda  }}seek",
+			"_type": "request"
+		},
+		{
+			"_id": "env_96d6512c956a4e43ba54e00f75627cdf",
+			"color": "#ff9300",
+			"created": 1555146079053,
+			"data": {
+				"lambda": "http://polaris.lostwith.me/.netlify/functions/"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1,
+			"modified": 1555146179668,
+			"name": "Live",
+			"parentId": "env_3f0515d0dcd14026b8143f7776d781cd",
+			"_type": "environment"
+		},
+		{
+			"_id": "env_aceb934feafc42b991d916112c2c4063",
+			"color": "#7d69cb",
+			"created": 1555146084905,
+			"data": {
+				"lambda": "http://localhost:9000/"
+			},
+			"isPrivate": false,
+			"metaSortKey": 0,
+			"modified": 1555146157654,
+			"name": "Dev",
+			"parentId": "env_3f0515d0dcd14026b8143f7776d781cd",
+			"_type": "environment"
+		}
+	]
+}
