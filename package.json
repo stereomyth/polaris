@@ -2,24 +2,27 @@
   "name": "polaris",
   "version": "1.0.0",
   "description": "stella illa quae polaris dicitur",
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "netlify-lambda": "^1.4.3"
-  },
+  "author": "James King",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lambda": "netlify-lambda serve app/functions",
-    "build": "netlify-lambda build app/functions"
+    "dev": "nuxt",
+    "build": "nuxt build && netlify-lambda build functions",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lambda": "netlify-lambda serve functions"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.4.0",
+    "@nuxtjs/axios": "^5.3.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "netlify-lambda": "^1.4.3"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stereomyth/polaris.git"
   },
-  "author": "James King",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/stereomyth/polaris/issues"
-  },
-  "homepage": "https://github.com/stereomyth/polaris#readme"
+  "homepage": "https://polaris.lostwith.me"
 }
