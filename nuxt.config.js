@@ -16,6 +16,15 @@ export default {
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       { rel: 'stylesheet', href: 'https://use.typekit.net/cmb4wle.css' },
     ],
+    script: [
+      {
+        src: `https://maps.googleapis.com/maps/api/js?key=${
+          process.env.MAPS_KEY
+        }`,
+        async: true,
+        defer: true,
+      },
+    ],
   },
 
   loading: { color: '#fff' },
