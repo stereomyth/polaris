@@ -31,8 +31,8 @@ export default {
 
       navigator.geolocation.getCurrentPosition(
         position => {
-          this.loc.lat = position.coords.latitude.toFixed(3);
-          this.loc.lng = position.coords.longitude.toFixed(3);
+          this.loc.lat = position.coords.latitude;
+          this.loc.lng = position.coords.longitude;
 
           //     // setCoords(lat, long);
         },
@@ -130,7 +130,7 @@ export default {
 
     <!-- <hr> -->
 
-    <Map/>
+    <Map :coords="loc"/>
   </section>
 </template>
 
