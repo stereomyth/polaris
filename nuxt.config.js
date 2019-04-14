@@ -1,3 +1,4 @@
+require('dotenv').config();
 import pkg from './package';
 
 export default {
@@ -24,6 +25,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
   ],
 
   axios: {
