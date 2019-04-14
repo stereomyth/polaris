@@ -273,10 +273,4 @@ hr {
     top: 50%;
   }
 }
-
-#map {
-  height: 600px;
-  border: 1px solid #4e4e4e;
-  margin-top: 3em;
-}
 </style>

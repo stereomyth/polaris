@@ -1,6 +1,8 @@
 <script>
+import Map from "~/components/Map";
+
 export default {
-  components: {},
+  components: { Map },
   data: () => ({
     loc: { lat: 0, lng: 0 },
     dest: null
@@ -80,9 +82,9 @@ export default {
 
     <!-- <hr> -->
 
-    <div id="map"></div>
+    <Map/>
   </section>
 </template>
 
-<style>
+<style lang="scss">
 </style>
