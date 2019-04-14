@@ -109,58 +109,6 @@ button {
   }
 }
 
-.geo-btn {
-  padding: 11px 16px;
-  margin-right: 6px;
-  display: none;
-
-  &.visible {
-    display: inline-block;
-    vertical-align: bottom;
-  }
-}
-
-.geo-icon {
-  width: 16px;
-  height: 16px;
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  position: relative;
-
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    height: 2px;
-    width: 2px;
-    background-color: currentColor;
-  }
-
-  &:before {
-    height: 100%;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  &:after {
-    width: 100%;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-  }
-}
-
-.geo-icon-mask {
-  position: relative;
-  background-color: #222;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin: 2px;
-  z-index: 10;
-}
-
 input,
 .faux-input {
   transition: all 0.3s;
@@ -235,42 +183,6 @@ hr {
 .compass-contain {
   @include at-least($tablet) {
     width: 50%;
-  }
-}
-
-.compass {
-  border: 2px solid rgba(white, 0.2);
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  padding: 10px;
-  margin: 0px auto;
-}
-
-.needle {
-  height: 100px;
-  width: 12px;
-  margin: auto;
-  position: relative;
-
-  &:before,
-  &:after {
-    content: "";
-    height: 0;
-    width: 0;
-    position: absolute;
-    border: 6px solid transparent;
-  }
-
-  &:before {
-    border-bottom: 50px solid rgba(white, 0.7);
-    border-top-width: 0px;
-  }
-
-  &:after {
-    border-top: 50px solid rgba(white, 0.2);
-    border-bottom-width: 0px;
-    top: 50%;
   }
 }
 </style>
