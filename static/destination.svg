@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>destination</title>
+    <desc>Created with Sketch.</desc>
+    <g id="destination" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="marker" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M20,0 C8.954305,1.33226763e-15 1.33226763e-15,8.954305 0,20 C-1.33226763e-15,31.045695 8.954305,40 20,40 L40,40 L40,20 C40,8.954305 31.045695,2.22044605e-15 20,0 Z M20,37.72 C10.2135142,37.72 2.28,29.7864858 2.28,20 C2.28,10.2135142 10.2135142,2.28 20,2.28 C29.7864858,2.28 37.72,10.2135142 37.72,20 C37.72,24.6996362 35.8530768,29.2067875 32.5299322,32.5299322 C29.2067875,35.8530768 24.6996362,37.72 20,37.72 Z" id="Shape"></path>
+            <path d="M20,38 C10.0588745,38 2,29.9411255 2,20 C2,10.0588745 10.0588745,2 20,2 C29.9411255,2 38,10.0588745 38,20 C38,24.7738968 36.1035769,29.3522672 32.7279221,32.7279221 C29.3522672,36.1035769 24.7738968,38 20,38 Z" id="Path" opacity="0.196591332"></path>
+        </g>
+        <polygon id="Path" fill="#FFFFFF" fill-rule="nonzero" opacity="0.5" points="28 13 27 12 20 19 13 12 12 13 19 20 12 27 13 28 20 21 27 28 28 27 21 20"></polygon>
+    </g>
+</svg>
