@@ -130,7 +130,7 @@ export default {
 
     <!-- <hr> -->
 
-    <Map :coords="loc"/>
+    <Map :location="loc" :destination="{ lat: 45.508, lng: -73.587 }"/>
   </section>
 </template>
 

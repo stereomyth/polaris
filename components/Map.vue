@@ -1,55 +1,65 @@
 <script>
+import { gmapApi } from "vue2-google-maps";
 import mapStyle from "~/assets/mapStyle";
 
+const iconConf = {
+  anchor: { x: 20, y: 20 },
+  scaledSize: { width: 20, height: 20 }
+};
+
 export default {
-  props: ["coords"],
+  props: ["location", "destination"],
 
   mounted() {
-    // const initMap = () => {
-    // Create a map object and specify the DOM element for display.
-    let map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: -34.397, lng: 150.644 },
+    this.bounds();
+  },
+
+  watch: {
+    location: "bounds",
+    destination: "bounds"
+  },
+
+  methods: {
+    bounds() {
+      this.$refs.mapRef.$mapPromise.then(map => {
+        let bounds = new google.maps.LatLngBounds();
+        bounds.extend(this.location);
+        bounds.extend(this.destination);
+        map.fitBounds(bounds);
+      });
+    }
+  },
+
+  data: () => ({
+    options: {
       backgroundColor: "#222",
       disableDefaultUI: true,
       scrollwheel: false,
       styles: mapStyle,
       zoom: 1
-    });
-    let location = new google.maps.Marker({
-      icon: {
-        scaledSize: { width: 20, height: 20 },
-        url: "/marker1.png",
-        anchor: { x: 20, y: 20 }
-      },
-      position: this.coords,
+    },
 
-      map: map
-    });
-    // let destination = new google.maps.Marker({
-    //   icon: {
-    //     scaledSize: { width: 20, height: 20 },
-    //     url: "/images/marker2.png",
-    //     anchor: { x: 20, y: 20 }
-    //   },
-    //   position: dest,
-    //   map: map
-    // });
+    locationOptions: {
+      icon: { url: "/location.svg", ...iconConf }
+    },
 
-    // var bounds = new google.maps.LatLngBounds();
-    // bounds.extend(location.position);
-    // bounds.extend(destination.position);
-    // map.fitBounds(bounds);
-    // };
-  },
+    destinationOptions: {
+      icon: { url: "/destination.svg", ...iconConf }
+    }
+  }),
 
-  data: () => ({})
+  computed: {
+    google: gmapApi
+  }
 };
 </script>
 
 <template>
   <div>
-    <div id="map"></div>
-    <!-- <pre>{{coords}}</pre> -->
+    <gmap-map id="map" :center="{ lat: 45.508, lng: -73.587 }" :options="options" ref="mapRef">
+      <gmap-marker :position="location" :options="locationOptions"></gmap-marker>
+      <gmap-marker :position="destination" :options="destinationOptions"></gmap-marker>
+    </gmap-map>
   </div>
 </template>
 
