@@ -16,26 +16,13 @@ export default {
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       { rel: 'stylesheet', href: 'https://use.typekit.net/cmb4wle.css' },
     ],
-    script: [
-      {
-        src: `https://maps.googleapis.com/maps/api/js?key=${
-          process.env.MAPS_KEY
-        }`,
-        async: true,
-        defer: true,
-      },
-    ],
   },
 
   loading: { color: '#fff' },
   css: [],
-  plugins: [],
+  plugins: ['~/plugins/google-maps'],
 
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/dotenv',
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv'],
 
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
