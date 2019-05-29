@@ -70,7 +70,3 @@ export default {
   margin-top: 3em;
 }
 </style>
-
-
-
-
