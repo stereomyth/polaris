@@ -49,7 +49,14 @@ export default {
   }),
 
   computed: {
-    google: gmapApi
+    google: gmapApi,
+
+    hasLocation() {
+      return this.location.lat !== 0 && this.location.lat !== 0;
+    },
+    hasDestination() {
+      return this.destination.lat !== 0 && this.destination.lat !== 0;
+    }
   }
 };
 </script>
@@ -57,8 +64,8 @@ export default {
 <template>
   <div>
     <gmap-map id="map" :center="{ lat: 45.508, lng: -73.587 }" :options="options" ref="mapRef">
-      <gmap-marker :position="location" :options="locationOptions"></gmap-marker>
-      <gmap-marker :position="destination" :options="destinationOptions"></gmap-marker>
+      <gmap-marker :position="location" :options="locationOptions" v-if="hasLocation"></gmap-marker>
+      <gmap-marker :position="destination" :options="destinationOptions" v-if="hasDestination"></gmap-marker>
     </gmap-map>
   </div>
 </template>
