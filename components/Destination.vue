@@ -4,7 +4,7 @@ export default {
 
   methods: {},
 
-  data: () => ({}),
+  data: () => ({ dest: null }),
 
   computed: {}
 };

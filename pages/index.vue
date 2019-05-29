@@ -1,9 +1,10 @@
 <script>
 import Map from "~/components/Map";
 import Location from "~/components/Location";
+import Destination from "~/components/Destination";
 
 export default {
-  components: { Map, Location },
+  components: { Map, Location, Destination },
 
   methods: {
     setLocation({ latitude, longitude }) {
@@ -49,7 +50,7 @@ export default {
     <h1>Polaris</h1>
 
     <Location :location="location" @setLocation="setLocation"/>
-    <!-- <Destination/> -->
+    <Destination/>
     <Map :location="location" :destination="{ lat: 45.508, lng: -73.587 }"/>
   </section>
 </template>
