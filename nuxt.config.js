@@ -4,6 +4,10 @@ import pkg from './package';
 export default {
   mode: 'spa',
 
+  env: {
+    mapsKey: process.env.MAPS_KEY,
+  },
+
   head: {
     title: pkg.name,
     meta: [
