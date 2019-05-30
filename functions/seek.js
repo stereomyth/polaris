@@ -1,8 +1,46 @@
-exports.handler = function(event, context, callback) {
-  callback(null, {
-    statusCode: 200,
-    body: 'Hello, World',
-  });
+const axios = require('axios');
+
+require('dotenv').config();
+
+exports.handler = (event, context, callback) => {
+  const credentialsBase64Encoded = Buffer.from(
+    `${process.env.TWITTER_API}:${process.env.TWITTER_SECRET}`
+  ).toString('base64');
+
+  let accessToken = '';
+
+  axios
+    .post(
+      'https://api.twitter.com/oauth2/token',
+      'grant_type=client_credentials',
+      { headers: { Authorization: `Basic ${credentialsBase64Encoded}` } }
+    )
+    .then(res => {
+      accessToken = res.data.access_token;
+    })
+    .catch(error => {
+      callback(null, {
+        statusCode: error.response.status,
+        body: JSON.stringify(error.response.data.error),
+      });
+    });
+
+  axios
+    .get('https://api.twitter.com/1.1/tweets/search/30day/dev.json', {
+      headers: { authorization: `Bearer ${accessToken}` },
+    })
+    .then(res => {
+      callback(null, {
+        statusCode: 200,
+        body: res.data.title,
+      });
+    })
+    .catch(error => {
+      callback(null, {
+        statusCode: error.response.status,
+        body: JSON.stringify(error.response.data.error),
+      });
+    });
 };
 
 // toRad = deg => deg * Math.PI / 180;
