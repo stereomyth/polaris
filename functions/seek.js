@@ -3,45 +3,42 @@ const axios = require('axios');
 require('dotenv').config();
 
 exports.handler = (event, context, callback) => {
-  const credentialsBase64Encoded = Buffer.from(
-    `${process.env.TWITTER_API}:${process.env.TWITTER_SECRET}`
-  ).toString('base64');
-
-  let accessToken = '';
-
-  axios
-    .post(
-      'https://api.twitter.com/oauth2/token',
-      'grant_type=client_credentials',
-      { headers: { Authorization: `Basic ${credentialsBase64Encoded}` } }
-    )
-    .then(res => {
-      accessToken = res.data.access_token;
-    })
-    .catch(error => {
-      callback(null, {
-        statusCode: error.response.status,
-        body: JSON.stringify(error.response.data.error),
-      });
-    });
-
-  axios
-    .get('https://api.twitter.com/1.1/tweets/search/30day/dev.json', {
-      headers: { authorization: `Bearer ${accessToken}` },
-    })
-    .then(res => {
+  getToken()
+    .then(res => getTweets(res.data.access_token))
+    .then(response => {
       callback(null, {
         statusCode: 200,
-        body: res.data.title,
+        body: JSON.stringify(response.data),
       });
     })
     .catch(error => {
+      // console.log(error.response);
       callback(null, {
         statusCode: error.response.status,
         body: JSON.stringify(error.response.data.error),
       });
     });
 };
+
+const twitter = axios.create({
+  baseURL: 'https://api.twitter.com/',
+});
+
+function getToken() {
+  const basic = Buffer.from(
+    `${process.env.TWITTER_API}:${process.env.TWITTER_SECRET}`
+  ).toString('base64');
+
+  return twitter.post('oauth2/token', 'grant_type=client_credentials', {
+    headers: { Authorization: `Basic ${basic}` },
+  });
+}
+
+function getTweets(token) {
+  return twitter.get('1.1/tweets/search/30day/dev.json', {
+    headers: { authorization: `Bearer ${token}` },
+  });
+}
 
 // toRad = deg => deg * Math.PI / 180;
 // toDeg = rad => rad * 180 / Math.PI;
