@@ -15,7 +15,7 @@ exports.handler = (event, context, callback) => {
       // console.log(error.response);
       callback(null, {
         statusCode: error.response.status,
-        body: JSON.stringify(error.response.data.error),
+        body: JSON.stringify(error.response.data),
       });
     });
 };
@@ -35,7 +35,9 @@ function getToken() {
 }
 
 function getTweets(token) {
-  return twitter.get('1.1/tweets/search/30day/dev.json', {
+  return twitter.get('1.1/search/tweets.json', {
+    // return twitter.get('1.1/tweets/search/30day/dev.json', {
+    params: { q: 'i wish', count: 100 },
     headers: { authorization: `Bearer ${token}` },
   });
 }
